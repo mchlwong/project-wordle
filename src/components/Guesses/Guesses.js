@@ -1,10 +1,18 @@
 import React from 'react';
+import Guess from '../Guess/Guess';
+import {NUM_OF_GUESSES_ALLOWED} from '../../constants';
 
 function Guesses({guesses}) {
+  const rows = [];
+  let i = 0;
+  while (i < NUM_OF_GUESSES_ALLOWED) {
+    rows.push(i);
+    i++;
+  }
   return (
   <div className="guess-results">
-    {guesses.map(guess => (
-      <p key={Math.random()} className="guess">{guess}</p>
+    {rows.map(row => (
+      <Guess key={row} word={guesses[row]} />
     ))}
   </div>
   );
