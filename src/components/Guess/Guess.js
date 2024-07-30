@@ -1,24 +1,23 @@
 import React from 'react';
+import {checkGuess} from '../../game-helpers';
 
-function Guess({word}) {
+function Guess({word, answer}) {
+  const columns = [0, 1, 2, 3, 4];
   if (!word) {
     return (
       <p className="guess">
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
-        <span className="cell"></span>
+        {columns.map(column => (
+          <span key={column} className="cell"></span>
+        ))}
       </p>
     );
   }
+  const result = checkGuess(word, answer);
   return (
     <p className="guess">
-      <span className="cell">{[...word][0]}</span>
-      <span className="cell">{[...word][1]}</span>
-      <span className="cell">{[...word][2]}</span>
-      <span className="cell">{[...word][3]}</span>
-      <span className="cell">{[...word][4]}</span>
+      {columns.map(column => (
+        <span key={column} className={`cell ${result[column].status}`}>{[...word][column]}</span>
+      ))}
     </p>
   );
 }
